@@ -1,0 +1,4 @@
+com\mock\coa\model\Customer.class
+com\mock\coa\model\View.class
+com\mock\coa\CoaApplication.class
+com\mock\coa\controller\COAController.class

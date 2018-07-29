@@ -1,6 +1,6 @@
 package com.mock.coa.model;
 
-public class View {
+public class Views {
 	private int viewId;
 	private String viewType;
 	private String viewHdr;

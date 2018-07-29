@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mock.coa.model.Customer;
-import com.mock.coa.model.View;
+import com.mock.coa.model.Views;
 
 @RestController
 @RequestMapping("/coa")
@@ -51,21 +51,21 @@ public class COAController {
 	@GetMapping(value = "/getJSON", produces = MediaType.APPLICATION_JSON_VALUE)
 	public Customer getJSON(@PathVariable("id") String custId) {
 		Customer cust = new Customer();
-		View view1 = new View();
+		Views view1 = new Views();
 		view1.setViewId(1);
 		view1.setViewHdr("MainHdr");
 		view1.setViewType("Main View");
 		view1.setNoOfFields(2);
 		view1.setCollapsable(true);
 		view1.setDraggable(false);
-		View view2 = new View();
+		Views view2 = new Views();
 		view2.setViewId(2);
 		view2.setViewHdr("SubHdr");
 		view2.setViewType("Sub View");
 		view2.setNoOfFields(3);
 		view2.setCollapsable(false);
 		view2.setDraggable(true);
-		List<View> totviews = new ArrayList<View>();
+		List<Views> totviews = new ArrayList<Views>();
 		totviews.add(view1);
 		totviews.add(view2);
 		cust.setCompId("1");

@@ -1,0 +1,23 @@
+{
+    "compId": "1",
+    "compCountry": "India",
+    "views": [
+        {
+            "viewId": 1,
+            "viewType": "Main View",
+            "viewHdr": "MainHdr",
+            "noOfFields": 2,
+            "draggable": false,
+            "collapsable": true
+        },
+        {
+            "viewId": 2,
+            "viewType": "Sub View",
+            "viewHdr": "SubHdr",
+            "noOfFields": 3,
+            "draggable": true,
+            "collapsable": false
+        }
+    ],
+    "compName": "Zycus"
+}

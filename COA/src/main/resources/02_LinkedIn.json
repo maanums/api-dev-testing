@@ -1,0 +1,23 @@
+{
+    "compId": "2",
+    "compCountry": "US",
+    "views": [
+        {
+            "viewId": 1,
+            "viewType": "Main View",
+            "viewHdr": "MainHdr",
+            "noOfFields": 5,
+            "draggable": true,
+            "collapsable": true
+        },
+        {
+            "viewId": 3,
+            "viewType": "Sub View",
+            "viewHdr": "SubHdr",
+            "noOfFields": 6,
+            "draggable": false,
+            "collapsable": false
+        }
+    ],
+    "compName": "02_LinkedIn"
+}

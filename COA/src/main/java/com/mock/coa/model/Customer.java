@@ -6,9 +6,8 @@ public class Customer {
 
 	private String compId;
 	private String compCountry;
-	private List<View> views;
-
 	private String compName;
+	private List<Views> views;
 
 	public String getCompName() {
 		return compName;
@@ -34,11 +33,13 @@ public class Customer {
 		this.compCountry = compCountry;
 	}
 
-	public List<View> getViews() {
+	public List<Views> getViews() {
 		return views;
 	}
 
-	public void setViews(List<View> views) {
+	public void setViews(List<Views> views) {
 		this.views = views;
 	}
+
+	
 }

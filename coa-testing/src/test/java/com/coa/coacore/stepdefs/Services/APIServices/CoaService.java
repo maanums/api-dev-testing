@@ -86,10 +86,30 @@ public class CoaService {
 
 	@Then("^I extract the customer information from response$")
 	public void iExtractCustInfoFromResponse() {
+		checkstatuscode();
+	}
+
+	private void checkstatuscode() {
+		System.out.println("status code: " + response.getStatusCode());
+		if(response.getStatusCode() == 200 || response.getStatusCode() == 201){
+			successscenario();
+		}
+		else{
+			failurescenario();
+		}
+	}
+
+	private void failurescenario() {
+		String responseString = response.asString();
+		JSONObject jsonObject = new JSONObject(responseString);
+		String errorMessage = jsonObject.getString("message");
+		System.out.println(errorMessage + " With Status code: "+ response.getStatusCode());
+	}
+
+	private void successscenario() {
 		String responseString = response.asString();
 		JSONObject jsonObject = new JSONObject(responseString);
 		try {
-			//Assert.assertEquals(response.getStatusCode(), 200);
 			customer.setCompId(jsonObject.getString("compId"));
 			customer.setCompName(jsonObject.getString("compName"));
 			customer.setCompCountry(jsonObject.getString("compCountry"));
@@ -110,7 +130,7 @@ public class CoaService {
 		catch (JSONException exception) {
 			String errorMessage = jsonObject.getString("message");
 			System.out.println(errorMessage + "With Status code: "+ response.getStatusCode());
-		}
+		}		
 	}
 	
 }

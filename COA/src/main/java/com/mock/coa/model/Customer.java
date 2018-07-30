@@ -2,8 +2,11 @@ package com.mock.coa.model;
 
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
+
 public class Customer {
 
+	@NotNull
 	private String compId;
 	private String compCountry;
 	private String compName;

@@ -5,6 +5,7 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.Valid;
 import javax.xml.ws.Response;
 
 import org.springframework.core.io.ClassPathResource;
@@ -28,51 +29,37 @@ import com.mock.coa.model.Views;
 public class COAController {
 
 	@PostMapping(value = "/customers", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> saveCustomerInfo(@RequestBody Customer custInfo) {
+	public ResponseEntity<String> saveCustomerInfo(
+			@RequestBody @Valid Customer custInfo) {
 		String response = "{\"message\":\"Saved successfully\"}";
 		return new ResponseEntity<String>(response, HttpStatus.CREATED);
+
 	}
 
 	@GetMapping(value = "/customers/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> getCustomerInfo(@PathVariable("id") String custId) {
 		String response = "";
 		try {
-			response = StreamUtils.copyToString(new ClassPathResource(custId + ".json").getInputStream(),
-					Charset.defaultCharset());
+
+			if (custId.equals("03_Test_401")) {
+				response = "{\"message\":\"You do not have access\"}";
+				return new ResponseEntity<String>(response,
+						HttpStatus.UNAUTHORIZED);
+			} else if (custId.equals("04_Test_500")) {
+				response = "{\"message\":\"Oops! Something went wrong\"}";
+				return new ResponseEntity<String>(response,
+						HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+
+			response = StreamUtils.copyToString(new ClassPathResource(custId
+					+ ".json").getInputStream(), Charset.defaultCharset());
 
 		} catch (IOException e) {
 			e.printStackTrace();
 			String returnMsg = "{\"message\":\"Company not found\"}";
-			return new ResponseEntity<String>(returnMsg, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<String>(returnMsg, HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<String>(response, HttpStatus.OK);
-	}
-
-	@GetMapping(value = "/getJSON", produces = MediaType.APPLICATION_JSON_VALUE)
-	public Customer getJSON(@PathVariable("id") String custId) {
-		Customer cust = new Customer();
-		Views view1 = new Views();
-		view1.setViewId(1);
-		view1.setViewHdr("MainHdr");
-		view1.setViewType("Main View");
-		view1.setNoOfFields(2);
-		view1.setCollapsable(true);
-		view1.setDraggable(false);
-		Views view2 = new Views();
-		view2.setViewId(2);
-		view2.setViewHdr("SubHdr");
-		view2.setViewType("Sub View");
-		view2.setNoOfFields(3);
-		view2.setCollapsable(false);
-		view2.setDraggable(true);
-		List<Views> totviews = new ArrayList<Views>();
-		totviews.add(view1);
-		totviews.add(view2);
-		cust.setCompId("1");
-		cust.setCompName("Zycus");
-		cust.setCompCountry("India");
-		cust.setViews(totviews);
-		return cust;
 	}
 
 }

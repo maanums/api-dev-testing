@@ -1,0 +1,23 @@
+{
+    "compId": null,
+    "compCountry": "US",
+    "views": [
+        {
+            "viewId": "abc",
+            "viewType": "Main View",
+            "viewHdr": "MainHdr",
+            "noOfFields": 2,
+            "draggable": false,
+            "collapsable": true
+        },
+        {
+            "viewId": 3,
+            "viewType": "Sub View",
+            "viewHdr": "SubHdr",
+            "noOfFields": 3,
+            "draggable": true,
+            "collapsable": false
+        }
+    ],
+    "compName": "03_Test"
+}

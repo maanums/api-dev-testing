@@ -1,7 +1,7 @@
 @COATest @Get
 Feature: Get Customer Information based on CustomerID
 
-		@Success
+		@Success @GetSuccess
     Scenario Outline: Validate COA Get Method for success scenarios
         Given I select the CustomerId as "<CustId>"
         When I access the service "COA.GetCustomerInfo"
@@ -13,7 +13,7 @@ Feature: Get Customer Information based on CustomerID
       | 02_LinkedIn   |
       
       
-     @Failure
+     @Failure @GetFailure
     Scenario Outline: Validate COA Get Method for failure scenarios
         Given I select the CustomerId as "<CustId>"
         When I access the service "COA.GetCustomerInfo"

@@ -55,7 +55,6 @@ public class CoaService {
 	}
 	
 	public void getCustInfo() {
-		
 		loadRequestUrlHeaders();
 		response = getResponse("COA.GetCustomerInfo");
 		response.prettyPrint();
@@ -70,7 +69,7 @@ public class CoaService {
 					res = request.get("/customers/"+baseService.getCustId()).then().contentType(ContentType.JSON).extract().response();
 					break;
 		
-				case "COA.PostCustomers":
+				case "COA.PostCustomerInfo":
 					res = request.post("/customers/")
 							.then().contentType(ContentType.JSON).extract().response();
 					break;
@@ -86,27 +85,33 @@ public class CoaService {
 
 	@Then("^I extract the customer information from response$")
 	public void iExtractCustInfoFromResponse() {
-		checkstatuscode();
-	}
-
-	private void checkstatuscode() {
-		System.out.println("status code: " + response.getStatusCode());
-		if(response.getStatusCode() == 200 || response.getStatusCode() == 201){
-			successscenario();
+		boolean status = checkStatusCode();
+		if(status){
+			getSuccessScenario();
 		}
 		else{
-			failurescenario();
+			getFailureScenario();
 		}
 	}
 
-	private void failurescenario() {
+	private boolean checkStatusCode() {
+		boolean status = true;
+		if(response.getStatusCode() == 200 || response.getStatusCode() == 201){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+
+	private void getFailureScenario() {
 		String responseString = response.asString();
 		JSONObject jsonObject = new JSONObject(responseString);
 		String errorMessage = jsonObject.getString("message");
 		System.out.println(errorMessage + " With Status code: "+ response.getStatusCode());
 	}
 
-	private void successscenario() {
+	private void getSuccessScenario() {
 		String responseString = response.asString();
 		JSONObject jsonObject = new JSONObject(responseString);
 		try {
@@ -132,5 +137,25 @@ public class CoaService {
 			System.out.println(errorMessage + "With Status code: "+ response.getStatusCode());
 		}		
 	}
+
+	public void postCustInfo() {
+		loadRequestUrlHeaders();
+		request.body(BaseService.getPostBody());
+		//request.body(baseService.getCustomerId()+".json");
+		response = getResponse("COA.PostCustomerInfo");
+		response.prettyPrint();
+	}
+	
+	@Then("^I extract the response information$")
+	public void iExtractResponseInfo() {
+		checkStatusCode();
+		String responseString = response.asString();
+		JSONObject jsonObject = new JSONObject(responseString);
+		String errorMessage = jsonObject.getString("message");
+		System.out.println(errorMessage + " With Status code: "+ response.getStatusCode());
+		
+	}
+
+	
 	
 }

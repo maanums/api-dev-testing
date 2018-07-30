@@ -1,25 +1,24 @@
 @COATest @Post
 Feature: Insert Customer Information in json format
 
-		@Success
+		@Success @PostSuccess
     Scenario Outline: Validate COA Post Method for success scenarios
         Given I create customization for "<Customer>"
         When I access the service "COA.PostCustomerInfo"
   	    Then I extract the response information
   
   			Examples:  
-      |  CustId  			| 
+      |  Customer 		| 
       | 01_Zycus 		  | 
       | 02_LinkedIn   |
       
       
-     @Failure
+     @Failure @PostFailure
     Scenario Outline: Validate COA Post Method for failure scenarios
         Given I create customization for "<Customer>"
         When I access the service "COA.PostCustomerInfo"
   	    Then I extract the response information
   
   			Examples:  
-      |  CustId  			| 
+      |  Customer  		| 
       | 03_Test_400   |
-      | 04_Test_404   |

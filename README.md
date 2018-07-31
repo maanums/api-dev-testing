@@ -14,7 +14,7 @@ Code for the mock APIs. Developed using Spring Boot.
 ### coa-testing 
 
 Code for validating the APIs. Developed using Cucumber and Rest Assured combination. 
-Please find the test scenarios the [Wiki](https://github.com/maanums/api-dev-testing/wiki/Test-Scenarios-for-API-testing) page.
+Please find the test scenarios in the [Wiki](https://github.com/maanums/api-dev-testing/wiki/Test-Scenarios-for-API-testing) page.
 
 To get started follow below steps:
 
